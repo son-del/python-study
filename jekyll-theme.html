@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jekyll 테마 이해하기</title>
+  <meta name="description" content="GitHub Pages에서 사용되는 Jekyll 테마의 개념과 설정 예시를 설명합니다." />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, 'Noto Sans KR', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    h1, h2, h3 {
+      color: #0f172a;
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 15px;
+    }
+    code {
+      background: #e2e8f0;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .example {
+      margin: 1.5rem 0;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #64748b;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jekyll 테마란?</h1>
+    <p>GitHub Pages에서 블로그 디자인을 쉽게 바꾸는 방법</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Jekyll이란?</h2>
+      <p>
+        <b>Jekyll</b>은 <b>정적 사이트 생성기(Static Site Generator)</b>예요.  
+        Markdown 파일이나 HTML 템플릿을 이용해 자동으로 웹사이트를 만들어줍니다.  
+        GitHub Pages는 내부적으로 Jekyll을 지원해서, 별도 설치 없이 블로그처럼 꾸밀 수 있습니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Jekyll 테마란?</h2>
+      <p>
+        테마(theme)는 Jekyll 사이트의 <b>디자인과 구조를 미리 정의한 패키지</b>예요.  
+        CSS, 레이아웃, 글 목록, 내비게이션 등을 포함하고 있어서,  
+        설정 한 줄만 추가해도 사이트의 전체 스타일을 바꿀 수 있습니다.
+      </p>
+
+      <ul>
+        <li>공식 테마: <code>minima</code>, <code>jekyll-theme-cayman</code>, <code>jekyll-theme-slate</code> 등</li>
+        <li>사용자 제작 테마도 <a href="https://jekyllrb.com/docs/themes/" target="_blank">Jekyll 공식 사이트</a>에서 설치 가능</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 테마 적용 예시</h2>
+      <p><code>_config.yml</code> 파일은 Jekyll 사이트의 설정 파일이에요.  
+      여기에 아래처럼 테마를 지정하면 됩니다.</p>
+
+      <div class="example">
+        <pre><code># _config.yml
+title: "파이썬 공부 블로그"
+description: "GitHub Pages와 Jekyll로 만드는 정적 블로그"
+theme: jekyll-theme-cayman
+markdown: kramdown
+</code></pre>
+      </div>
+
+      <p>위처럼 <code>theme:</code> 값을 바꾸면,  
+      사이트 전체가 선택한 테마의 색상과 스타일로 자동 변합니다.</p>
+    </section>
+
+    <section>
+      <h2>4. GitHub Pages에서 적용하기</h2>
+      <p>
+        GitHub Pages는 Jekyll을 내장하고 있어서 별도의 설치 과정이 없습니다.  
+        저장소 루트(예: <code>python-study</code>)에 <code>_config.yml</code> 파일을 추가하고  
+        테마 이름만 지정하면 됩니다.
+      </p>
+
+      <div class="example">
+        <pre><code># _config.yml 예시
+theme: jekyll-theme-minimal
+</code></pre>
+      </div>
+
+      <p>
+        이후 저장소를 커밋하고 배포하면,  
+        페이지가 지정한 테마로 새롭게 렌더링됩니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. 직접 커스터마이징하기</h2>
+      <p>
+        Jekyll 테마를 적용한 뒤에도 <code>assets</code> 폴더나 <code>_layouts</code> 디렉터리를 만들어  
+        일부 스타일을 덮어쓸 수 있습니다.
+      </p>
+
+      <div class="example">
+        <pre><code># 예: CSS 수정
+assets/css/style.scss
+
+---
+---
+
+@import "{{ site.theme }}";
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fefcf9;
+}
+</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. 결과 미리보기</h2>
+      <p>GitHub Pages 설정에서 <b>Branch: main</b>, <b>Folder: /(root)</b>로 지정한 후  
+      <code>https://사용자이름.github.io/저장소이름/</code> 로 들어가면  
+      테마가 적용된 사이트를 볼 수 있습니다.</p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> 파이썬기초 배우기 · Jekyll 학습 예제
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
