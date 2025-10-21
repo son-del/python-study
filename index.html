@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>파이썬기초 배우기</title>
+  <meta name="description" content="파이썬 기초 문법부터 실습까지, 처음부터 차근차근 배우는 블로그." />
+  <meta property="og:title" content="파이썬기초 배우기" />
+  <meta property="og:description" content="파이썬 기초 문법부터 실습까지, 처음부터 차근차근 배우는 블로그." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -4 24 24'%3E%3Ctext y='16' font-size='16'%3E🐍%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --panel: #12151c;
+      --text: #e8ecf1;
+      --muted: #9aa7b2;
+      --brand: #4cc38a;      /* 초록 포인트 */
+      --brand-2: #22a3ff;    /* 파랑 보조 */
+      --code: #0f172a;
+      --border: #202633;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7fafc;
+        --panel: #ffffff;
+        --text: #0b1220;
+        --muted: #51606c;
+        --code: #0b1220;
+        --border: #e6edf3;
+        --shadow: 0 8px 24px rgba(13,38,76,.08);
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Pretendard, Apple SD Gothic Neo, "Noto Sans KR", "Malgun Gothic", sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 500px at 80% -10%, rgba(76,195,138,.18), transparent 60%),
+                  radial-gradient(1000px 500px at 10% -20%, rgba(34,163,255,.15), transparent 60%),
+                  var(--bg);
+    }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    /* Skip link for accessibility */
+    .skip { position:absolute; left:-9999px; }
+    .skip:focus { left:16px; top:16px; background:#000; color:#fff; padding:8px 12px; border-radius:8px; z-index:999; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,12,16,.6); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+    }
+    .brand {
+      display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text);
+      font-weight: 700; letter-spacing: -0.3px;
+    }
+    .brand .logo { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow: var(--shadow); }
+    .brand .logo span { filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+    .nav a.link { color: var(--muted); text-decoration: none; margin-left:18px; font-weight:600 }
+    .nav a.link:hover { color: var(--text); }
+    .cta {
+      padding:8px 14px; border-radius:10px; background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#061018; text-decoration:none; font-weight:800; box-shadow: var(--shadow);
+    }
+    /* Hero */
+    .hero { padding: 56px 0 26px; }
+    .hero .wrap {
+      display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: center;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero .intro { padding: 28px; }
+    .hero h1 { font-size: clamp(28px, 3.5vw, 44px); margin: 0 0 12px; letter-spacing: -0.6px; }
+    .hero p { color: var(--muted); margin: 0 0 18px; }
+    .hero .badges { display:flex; gap:10px; flex-wrap: wrap; }
+    .badge {
+      border:1px solid var(--border); color: var(--muted); padding:6px 10px; border-radius: 999px; background: rgba(0,0,0,.12);
+    }
+    pre.code {
+      margin: 0; padding: 20px; background: #0b0f1a; color: #d1e7ff; border-radius: var(--radius);
+      border-top-left-radius: 0; border-top-right-radius: 0; overflow:auto; border-top:1px solid var(--border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Noto Sans Mono", monospace;
+      font-size: 14px;
+    }
+    .code-head { padding: 12px 16px; display:flex; align-items:center; justify-content:space-between; }
+    .dots { display:flex; gap:6px; }
+    .dot { width:10px; height:10px; border-radius:50%; background:#ff5f56; }
+    .dot:nth-child(2){ background:#ffbd2e } .dot:nth-child(3){ background:#27c93f }
+    /* Sections */
+    section { padding: 28px 0; }
+    .grid {
+      display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px;
+    }
+    .post { grid-column: span 4; padding:18px; display:flex; flex-direction:column; gap:10px }
+    .post h3 { margin:4px 0 0; font-size: 18px; }
+    .post p { margin:0; color: var(--muted); }
+    .tag { font-size: 12px; color: var(--brand); font-weight:700; letter-spacing:.2px }
+    .read { margin-top:auto; color: var(--brand-2); font-weight:700; text-decoration:none }
+    .panel { padding: 18px; }
+    .list { display:flex; flex-direction:column; gap:10px }
+    .list a { color: var(--text); text-decoration: none; }
+    .list a span { color: var(--muted) }
+    footer {
+      margin-top: 30px; padding: 26px 0 40px; color: var(--muted); border-top:1px solid var(--border);
+    }
+    .newsletter { display:flex; gap:10px; }
+    .newsletter input {
+      flex:1; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background: var(--panel); color: var(--text);
+    }
+    .newsletter button {
+      padding:12px 16px; border-radius:10px; border:1px solid var(--border); background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#061018; font-weight:800;
+    }
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; }
+      .post { grid-column: span 6; }
+    }
+    @media (max-width: 600px) {
+      .post { grid-column: span 12; }
+      .nav .hide-sm { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 바로가기</a>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="파이썬기초 배우기 홈">
+        <div class="logo" aria-hidden="true"><span>🐍</span></div>
+        <span>파이썬기초 배우기</span>
+      </a>
+      <nav>
+        <a class="link hide-sm" href="#posts">학습글</a>
+        <a class="link hide-sm" href="#topics">주제별</a>
+        <a class="link hide-sm" href="#about">소개</a>
+        <a class="cta" href="#newsletter">업데이트 받기</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="card intro">
+          <h1>파이썬, 기초부터 차근차근</h1>
+          <p>설치, 문법, 자료형, 제어문, 함수까지. 실습 위주로 매일 한 걸음씩 나아갑니다.</p>
+          <div class="badges" aria-label="학습 경로">
+            <span class="badge">#입문</span>
+            <span class="badge">#자료형</span>
+            <span class="badge">#제어문</span>
+            <span class="badge">#함수</span>
+            <span class="badge">#문제풀이</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="code-head">
+            <strong>hello.py</strong>
+            <div class="dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          </div>
+<pre class="code"><code># 가장 첫 번째 파이썬 프로그램
+name = input("이름을 입력하세요: ")
+print(f"안녕하세요, {name}님! 파이썬에 오신 것을 환영해요 🐍")</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured posts -->
+    <section id="posts">
+      <h2 style="margin:0 0 12px">최근 게시글</h2>
+      <div class="grid">
+        <article class="card post" aria-labelledby="p1-title">
+          <span class="tag">입문</span>
+          <h3 id="p1-title"><a href="#" style="text-decoration:none; color:inherit">파이썬 설치 &amp; VS Code 세팅</a></h3>
+          <p>파이썬 설치, 가상환경 만들기, VS Code 확장 추천까지 한번에 정리.</p>
+          <a class="read" href="#">글 읽기 →</a>
+        </article>
+
+        <article class="card post" aria-labelledby="p2-title">
+          <span class="tag">자료형</span>
+          <h3 id="p2-title"><a href="#" style="text-decoration:none; color:inherit">숫자 · 문자열 · 불리언 한 방에</a></h3>
+          <p>파이썬의 기본 자료형과 형 변환, 자주 하는 실수까지 예제로 익히기.</p>
+          <a class="read" href="#">글 읽기 →</a>
+        </article>
+
+        <article class="card post" aria-labelledby="p3-title">
+          <span class="tag">제어문</span>
+          <h3 id="p3-title"><a href="#" style="text-decoration:none; color:inherit">if / for / while 제대로 쓰기</a></h3>
+          <p>조건문과 반복문의 핵심 패턴과 실전 예제 모음.</p>
+          <a class="read" href="#">글 읽기 →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Topics & quick links -->
+    <section id="topics" class="grid">
+      <aside class="card panel" style="grid-column: span 7">
+        <h2 style="margin:6px 0 12px">주제별 모아보기</h2>
+        <div class="grid" style="grid-template-columns: repeat(6, 1fr); gap: 12px;">
+          <a class="card panel" href="#" style="grid-column: span 3; text-decoration:none; color:inherit;">
+            <strong>함수</strong><br><span class="muted">매개변수, 반환값, 스코프</span>
+          </a>
+          <a class="card panel" href="#" style="grid-column: span 3; text-decoration:none; color:inherit;">
+            <strong>컬렉션</strong><br><span class="muted">list / dict / set / tuple</span>
+          </a>
+          <a class="card panel" href="#" style="grid-column: span 3; text-decoration:none; color:inherit;">
+            <strong>파일 I/O</strong><br><span class="muted">텍스트 · CSV 다루기</span>
+          </a>
+          <a class="card panel" href="#" style="grid-column: span 3; text-decoration:none; color:inherit;">
+            <strong>예외 처리</strong><br><span class="muted">try / except / finally</span>
+          </a>
+        </div>
+      </aside>
+
+      <aside class="card panel" style="grid-column: span 5">
+        <h2 style="margin:6px 0 12px">빠른 시작</h2>
+        <div class="list">
+          <a href="#">📦 파이썬 설치 가이드 <span>— Windows / macOS</span></a>
+          <a href="#">🧪 대화형 셸 기본 명령 <span>— REPL 사용법</span></a>
+          <a href="#">🧰 개발 환경 팁 <span>— 가상환경, 패키지</span></a>
+          <a href="#">📝 코딩 규칙 <span>— PEP 8 핵심</span></a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- About & Newsletter -->
+    <section id="about" class="grid">
+      <div class="card panel" style="grid-column: span 7">
+        <h2 style="margin:6px 0 12px">이 블로그는</h2>
+        <p>파이썬을 처음 시작하는 분들을 위해 핵심만 간결하게 정리합니다. 짧은 예제, 바로 실행 가능한 실습, 그리고 자주 묻는 질문에 대한 답을 제공합니다.</p>
+      </div>
+
+      <div id="newsletter" class="card panel" style="grid-column: span 5">
+        <h2 style="margin:6px 0 12px">업데이트 알림 받기</h2>
+        <form class="newsletter" onsubmit="event.preventDefault(); alert('이메일이 저장된 것처럼 동작하는 데모입니다. 백엔드 연결 후 사용하세요.');">
+          <label class="sr-only" for="email">이메일</label>
+          <input id="email" type="email" placeholder="이메일 주소" aria-label="이메일 주소 입력" required>
+          <button type="submit">구독</button>
+        </form>
+        <p style="color:var(--muted); margin:10px 2px 0">개인정보는 서버에 전송되지 않습니다. 실제 배포 시 구독 서비스와 연동하세요.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> 파이썬기초 배우기 · 작성 코드와 글 일부는 CC BY-NC-SA 4.0을 따릅니다.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
