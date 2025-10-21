@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>파이썬 변수와 자료형</title>
+  <meta name="description" content="파이썬 변수 선언과 자료형의 기본 개념 및 예제 코드 정리" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, 'Noto Sans KR', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    h1, h2, h3 {
+      color: #0f172a;
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 15px;
+    }
+    code {
+      background: #e2e8f0;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .example {
+      margin: 1.5rem 0;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #64748b;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>파이썬 변수와 자료형</h1>
+    <p>데이터를 저장하고 다루는 가장 기본적인 개념</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. 변수란?</h2>
+      <p>변수는 값을 저장하기 위한 이름표예요. 파이썬에서는 변수 선언 시 자료형을 미리 지정하지 않아도 됩니다.</p>
+
+      <div class="example">
+        <pre><code># 변수 선언 예시
+name = "Alice"
+age = 25
+height = 165.4
+
+print(name)
+print(age)
+print(height)</code></pre>
+      </div>
+
+      <p>출력 결과:</p>
+      <pre><code>Alice
+25
+165.4</code></pre>
+    </section>
+
+    <section>
+      <h2>2. 주요 자료형</h2>
+      <p>파이썬에서 자주 쓰이는 기본 자료형은 아래와 같습니다.</p>
+      <ul>
+        <li><b>int</b>: 정수형 (예: <code>10</code>, <code>-3</code>)</li>
+        <li><b>float</b>: 실수형 (예: <code>3.14</code>, <code>-0.5</code>)</li>
+        <li><b>str</b>: 문자열형 (예: <code>"hello"</code>, <code>'파이썬'</code>)</li>
+        <li><b>bool</b>: 논리형 (예: <code>True</code>, <code>False</code>)</li>
+      </ul>
+
+      <div class="example">
+        <pre><code># 자료형 예시
+a = 10
+b = 3.14
+c = "파이썬"
+d = True
+
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))</code></pre>
+      </div>
+
+      <p>출력 결과:</p>
+      <pre><code>&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;
+&lt;class 'bool'&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>3. 여러 값 다루기</h2>
+      <p>변수끼리의 연산과 형 변환도 자주 사용됩니다.</p>
+
+      <div class="example">
+        <pre><code># 숫자 연산
+x = 5
+y = 2
+print("덧셈:", x + y)
+print("나눗셈:", x / y)
+print("몫:", x // y)
+print("제곱:", x ** y)
+
+# 형 변환
+num_str = "100"
+num = int(num_str)
+print("문자열 → 정수:", num + 50)</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 여러 변수 한 줄에 선언하기</h2>
+      <pre><code>x, y, z = 1, 2, 3
+print(x, y, z)</code></pre>
+
+      <p>또는 같은 값을 여러 변수에 동시에 할당할 수도 있습니다.</p>
+      <pre><code>a = b = c = 10
+print(a, b, c)</code></pre>
+    </section>
+
+    <section>
+      <h2>5. 문자열 포매팅</h2>
+      <p>변수의 값을 문자열 안에 넣는 대표적인 방법입니다.</p>
+
+      <div class="example">
+        <pre><code>name = "민수"
+age = 20
+print(f"안녕하세요, {name}님! 나이는 {age}살입니다.")</code></pre>
+
+        <p>출력 결과:</p>
+        <pre><code>안녕하세요, 민수님! 나이는 20살입니다.</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> 파이썬기초 배우기
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
