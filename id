@@ -8,95 +8,84 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -4 24 24'%3E%3Ctext y='16' font-size='16'%3E🐍%3C/text%3E%3C/svg%3E">
   <style>
     :root {
-      --bg: #0b0c10; --panel: #12151c; --text: #e8ecf1; --muted: #9aa7b2;
-      --brand: #4cc38a; --brand-2: #22a3ff; --border: #202633; --radius: 14px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --sticky-h: 64px; /* 헤더 높이 */
+      --bg:#0b0c10; --panel:#12151c; --text:#e8ecf1; --muted:#9aa7b2;
+      --brand:#4cc38a; --brand2:#22a3ff; --border:#202633; --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.35); --header:64px;
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#f7fafc; --panel:#fff; --text:#0b1220; --muted:#51606c; --border:#e6edf3; --shadow:0 8px 24px rgba(13,38,76,.08) }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#f7fafc;--panel:#fff;--text:#0b1220;--muted:#51606c;--border:#e6edf3;--shadow:0 8px 24px rgba(13,38,76,.08)}
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    /* 해시 이동 시 헤더에 가리지 않게 */
-    section{scroll-margin-top: calc(var(--sticky-h) + 16px)}
     body{
       margin:0; color:var(--text);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans KR","Malgun Gothic",sans-serif;
-      background: radial-gradient(1200px 500px at 80% -10%, rgba(76,195,138,.18), transparent 60%),
-                  radial-gradient(1000px 500px at 10% -20%, rgba(34,163,255,.15), transparent 60%),
-                  var(--bg);
+      background:radial-gradient(1200px 500px at 80% -10%, rgba(76,195,138,.18), transparent 60%),
+                 radial-gradient(1000px 500px at 10% -20%, rgba(34,163,255,.15), transparent 60%), var(--bg);
     }
+    section{scroll-margin-top:calc(var(--header) + 12px); padding:28px 0}
     .container{width:min(1100px,92%); margin:0 auto}
-    header{position:sticky; top:0; z-index:50; height:var(--sticky-h);
+    header{position:sticky; top:0; z-index:50; height:var(--header);
       background:rgba(10,12,16,.6); backdrop-filter:blur(10px); border-bottom:1px solid var(--border)}
     .nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
     .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); font-weight:800}
-    .brand .logo{width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
-      background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:var(--shadow)}
-    .nav a.link{color:var(--muted); text-decoration:none; margin-left:18px; font-weight:700}
-    .nav a.link.active{color:var(--text)}
-    .cta{padding:8px 14px; border-radius:10px; background:linear-gradient(135deg,var(--brand),var(--brand-2));
-      color:#061018; text-decoration:none; font-weight:800; box-shadow:var(--shadow)}
+    .brand .logo{width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(135deg,var(--brand),var(--brand2)); box-shadow:var(--shadow)}
+    nav a{color:var(--muted); text-decoration:none; margin-left:18px; font-weight:700}
+    nav a.active{color:var(--text)}
+    .cta{padding:8px 14px; border-radius:10px; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#061018; text-decoration:none; font-weight:800; box-shadow:var(--shadow)}
     .hero{padding:48px 0 20px}
     .hero .wrap{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid var(--border);
-      border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
     .hero .intro{padding:28px}
     .hero h1{font-size:clamp(28px,3.5vw,44px); margin:0 0 12px; letter-spacing:-.6px}
     .hero p{color:var(--muted); margin:0 0 18px}
     .badges{display:flex; gap:10px; flex-wrap:wrap}
-    .badge{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; background:rgba(0,0,0,.12); text-decoration:none}
-    .badge.active{color:#061018; background:linear-gradient(135deg,var(--brand),var(--brand-2)); border-color:transparent; font-weight:800}
+    .badge{border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:999px; text-decoration:none; background:rgba(0,0,0,.12)}
+    .badge.active{color:#061018; background:linear-gradient(135deg,var(--brand),var(--brand2)); border-color:transparent; font-weight:800}
     .code-head{padding:12px 16px; display:flex; align-items:center; justify-content:space-between}
     pre.code{margin:0; padding:20px; background:#0b0f1a; color:#d1e7ff; border-radius:var(--radius); border-top-left-radius:0; border-top-right-radius:0;
       overflow:auto; border-top:1px solid var(--border); font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono","Noto Sans Mono",monospace; font-size:14px}
-    section{padding:28px 0}
     .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
     .post{grid-column:span 4; padding:18px; display:flex; flex-direction:column; gap:10px}
     .post h3{margin:4px 0 0; font-size:18px}
     .post p{margin:0; color:var(--muted)}
     .tag{font-size:12px; color:var(--brand); font-weight:700; letter-spacing:.2px}
-    .read{margin-top:auto; color:var(--brand-2); font-weight:700; text-decoration:none}
+    .read{margin-top:auto; color:var(--brand2); font-weight:700; text-decoration:none}
     .panel{padding:18px}
     .list{display:flex; flex-direction:column; gap:10px}
     .list a{color:var(--text); text-decoration:none}
     .list a span{color:var(--muted)}
     footer{margin-top:30px; padding:26px 0 40px; color:var(--muted); border-top:1px solid var(--border)}
-    @media (max-width: 900px){.hero .wrap{grid-template-columns:1fr}.post{grid-column:span 6}}
-    @media (max-width: 600px){.post{grid-column:span 12}.nav .hide-sm{display:none}}
+    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.post{grid-column:span 6}}
+    @media (max-width:600px){.post{grid-column:span 12}.hide-sm{display:none}}
   </style>
 </head>
 <body>
-  <a class="skip" href="#main" style="position:absolute;left:-9999px">본문으로 바로가기</a>
+  <a href="#main" style="position:absolute;left:-9999px">본문으로 바로가기</a>
 
-  <!-- NAV -->
+  <!-- 헤더 / 내비 -->
   <header>
     <div class="container nav">
-      <a class="brand" href="#" aria-label="파이썬기초 배우기 홈">
-        <div class="logo" aria-hidden="true"><span>🐍</span></div>
-        <span>파이썬기초 배우기</span>
+      <a class="brand" href="#home" aria-label="파이썬기초 배우기 홈">
+        <div class="logo" aria-hidden="true">🐍</div><span>파이썬기초 배우기</span>
       </a>
-      <nav>
-        <!-- 상단 메뉴도 해시 링크 연결 -->
-        <a class="link hide-sm" href="#posts">학습글</a>
-        <a class="link hide-sm" href="#topics">주제별</a>
-        <a class="link hide-sm" href="#about">소개</a>
+      <nav id="topnav">
+        <a class="hide-sm" href="#posts">학습글</a>
+        <a class="hide-sm" href="#topics">주제별</a>
+        <a class="hide-sm" href="#about">소개</a>
         <a class="cta" href="#newsletter">업데이트 받기</a>
       </nav>
     </div>
   </header>
 
   <main id="main" class="container">
-    <!-- HERO -->
+    <!-- 히어로 -->
     <section class="hero" id="home">
       <div class="wrap">
         <div class="card intro">
           <h1>파이썬, 기초부터 차근차근</h1>
           <p>설치, 문법, 자료형, 제어문, 함수까지. 실습 위주로 매일 한 걸음씩 나아갑니다.</p>
-
-          <!-- 배지: 모두 해시 링크로 연결 -->
-          <div class="badges" aria-label="학습 경로">
+          <div class="badges" id="badges">
             <a class="badge" href="#intro">#입문</a>
             <a class="badge" href="#datatype">#자료형</a>
             <a class="badge" href="#control">#제어문</a>
@@ -108,7 +97,7 @@
         <div class="card">
           <div class="code-head">
             <strong>hello.py</strong>
-            <div class="dots" aria-hidden="true" style="display:flex;gap:6px">
+            <div aria-hidden="true" style="display:flex;gap:6px">
               <span style="width:10px;height:10px;border-radius:50%;background:#ff5f56"></span>
               <span style="width:10px;height:10px;border-radius:50%;background:#ffbd2e"></span>
               <span style="width:10px;height:10px;border-radius:50%;background:#27c93f"></span>
@@ -121,54 +110,53 @@ print(f"안녕하세요, {name}님! 파이썬에 오신 것을 환영해요 🐍
       </div>
     </section>
 
-    <!-- POSTS (카드 클릭도 해시로 이동) -->
+    <!-- 글 카드 -->
     <section id="posts">
       <h2 style="margin:0 0 12px">최근 게시글</h2>
       <div class="grid">
-        <article class="card post" aria-labelledby="p1-title">
+        <article class="card post">
           <span class="tag">입문</span>
-          <h3 id="p1-title"><a href="#intro" style="text-decoration:none; color:inherit">파이썬 설치 &amp; VS Code 세팅</a></h3>
-          <p>파이썬 설치, 가상환경 만들기, VS Code 확장 추천까지 한번에 정리.</p>
+          <h3><a href="#intro" style="text-decoration:none;color:inherit">파이썬 설치 &amp; VS Code 세팅</a></h3>
+          <p>설치, 가상환경, VS Code 확장 추천까지 한번에.</p>
           <a class="read" href="#intro">글 읽기 →</a>
         </article>
 
-        <article class="card post" aria-labelledby="p2-title">
+        <article class="card post">
           <span class="tag">자료형</span>
-          <h3 id="p2-title"><a href="#datatype" style="text-decoration:none; color:inherit">숫자 · 문자열 · 불리언 한 방에</a></h3>
-          <p>파이썬의 기본 자료형과 형 변환, 자주 하는 실수까지 예제로 익히기.</p>
+          <h3><a href="#datatype" style="text-decoration:none;color:inherit">숫자 · 문자열 · 불리언</a></h3>
+          <p>기본 자료형, 형 변환, 자주 하는 실수.</p>
           <a class="read" href="#datatype">글 읽기 →</a>
         </article>
 
-        <article class="card post" aria-labelledby="p3-title">
+        <article class="card post">
           <span class="tag">제어문</span>
-          <h3 id="p3-title"><a href="#control" style="text-decoration:none; color:inherit">if / for / while 제대로 쓰기</a></h3>
-          <p>조건문과 반복문의 핵심 패턴과 실전 예제 모음.</p>
+          <h3><a href="#control" style="text-decoration:none;color:inherit">if / for / while</a></h3>
+          <p>조건문과 반복문의 핵심 패턴.</p>
           <a class="read" href="#control">글 읽기 →</a>
         </article>
       </div>
     </section>
 
-    <!-- INTRO (입문) -->
+    <!-- 실제 섹션들 (모두 id 부여) -->
     <section id="intro" class="card panel">
       <h2 style="margin:6px 0 12px">입문</h2>
-      <p>파이썬 설치, 가상환경 설정, VS Code 세팅, 기본 실행 방법을 다룹니다.</p>
+      <p>파이썬 설치, 가상환경 설정, VS Code 세팅, 기본 실행 방법.</p>
     </section>
 
-    <!-- TOPICS -->
     <section id="topics" class="grid">
       <aside class="card panel" style="grid-column: span 7">
         <h2 style="margin:6px 0 12px">주제별 모아보기</h2>
-        <div class="grid" style="grid-template-columns: repeat(6, 1fr); gap: 12px;">
-          <a class="card panel" href="#function" style="grid-column: span 3; text-decoration:none; color:inherit;">
+        <div class="grid" style="grid-template-columns:repeat(6,1fr);gap:12px">
+          <a class="card panel" href="#function" style="grid-column:span 3;text-decoration:none;color:inherit">
             <strong>함수</strong><br><span class="muted">매개변수, 반환값, 스코프</span>
           </a>
-          <a class="card panel" href="#datatype" style="grid-column: span 3; text-decoration:none; color:inherit;">
+          <a class="card panel" href="#datatype" style="grid-column:span 3;text-decoration:none;color:inherit">
             <strong>컬렉션</strong><br><span class="muted">list / dict / set / tuple</span>
           </a>
-          <a class="card panel" href="#io" style="grid-column: span 3; text-decoration:none; color:inherit;">
-            <strong>파일 I/O</strong><br><span class="muted">텍스트 · CSV 다루기</span>
+          <a class="card panel" href="#io" style="grid-column:span 3;text-decoration:none;color:inherit">
+            <strong>파일 I/O</strong><br><span class="muted">텍스트 · CSV</span>
           </a>
-          <a class="card panel" href="#exception" style="grid-column: span 3; text-decoration:none; color:inherit;">
+          <a class="card panel" href="#exception" style="grid-column:span 3;text-decoration:none;color:inherit">
             <strong>예외 처리</strong><br><span class="muted">try / except / finally</span>
           </a>
         </div>
@@ -178,113 +166,114 @@ print(f"안녕하세요, {name}님! 파이썬에 오신 것을 환영해요 🐍
         <h2 style="margin:6px 0 12px">빠른 시작</h2>
         <div class="list">
           <a href="#intro">📦 파이썬 설치 가이드 <span>— Windows / macOS</span></a>
-          <a href="#intro">🧪 대화형 셸 기본 명령 <span>— REPL 사용법</span></a>
-          <a href="#intro">🧰 개발 환경 팁 <span>— 가상환경, 패키지</span></a>
-          <a href="#style">📝 코딩 규칙 <span>— PEP 8 핵심</span></a>
+          <a href="#intro">🧪 REPL 기본 명령 <span>— 대화형 셸</span></a>
+          <a href="#intro">🧰 가상환경/패키지 <span>— venv, pip</span></a>
+          <a href="#style">📝 코딩 규칙 <span>— PEP 8</span></a>
         </div>
       </aside>
     </section>
 
-    <!-- DATATYPE -->
     <section id="datatype" class="card panel">
       <h2 style="margin:6px 0 12px">자료형</h2>
       <p>정수, 실수, 문자열, 불리언과 형변환의 기초.</p>
       <p><a class="read" href="variables.html">자세한 문서 보기 →</a></p>
     </section>
 
-    <!-- CONTROL -->
     <section id="control" class="card panel">
       <h2 style="margin:6px 0 12px">제어문</h2>
-      <p>if, for, while로 프로그램의 흐름을 제어하는 방법.</p>
+      <p>if, for, while로 흐름 제어하기.</p>
     </section>
 
-    <!-- FUNCTION -->
     <section id="function" class="card panel">
       <h2 style="margin:6px 0 12px">함수</h2>
-      <p>함수 정의, 매개변수, 반환값, 스코프의 이해.</p>
+      <p>함수 정의, 매개변수, 반환값, 스코프.</p>
     </section>
 
-    <!-- FILE I/O -->
     <section id="io" class="card panel">
       <h2 style="margin:6px 0 12px">파일 I/O</h2>
-      <p>텍스트 파일을 열고 읽고 쓰는 기본 패턴.</p>
+      <p>텍스트 파일을 읽고 쓰는 기본 패턴.</p>
     </section>
 
-    <!-- EXCEPTION -->
     <section id="exception" class="card panel">
       <h2 style="margin:6px 0 12px">예외 처리</h2>
       <p>try / except / finally의 구조와 사용법.</p>
     </section>
 
-    <!-- STYLE -->
     <section id="style" class="card panel">
-      <h2 style="margin:6px 0 12px">코딩 규칙 (PEP 8 요약)</h2>
-      <p>가독성을 높이는 네이밍, 들여쓰기, 줄 길이 가이드.</p>
+      <h2 style="margin:6px 0 12px">코딩 규칙 (PEP 8)</h2>
+      <p>네이밍, 들여쓰기, 줄 길이 가이드.</p>
     </section>
 
-    <!-- ABOUT & NEWSLETTER -->
     <section id="about" class="grid">
-      <div class="card panel" style="grid-column: span 7">
+      <div class="card panel" style="grid-column:span 7">
         <h2 style="margin:6px 0 12px">이 블로그는</h2>
-        <p>파이썬을 처음 시작하는 분들을 위해 핵심만 간결하게 정리합니다. 짧은 예제, 바로 실행 가능한 실습, 그리고 자주 묻는 질문에 대한 답을 제공합니다.</p>
+        <p>처음 시작하는 분들을 위해 핵심만 간결하게 정리합니다.</p>
       </div>
 
-      <div id="newsletter" class="card panel" style="grid-column: span 5">
+      <div id="newsletter" class="card panel" style="grid-column:span 5">
         <h2 style="margin:6px 0 12px">업데이트 알림 받기</h2>
         <form class="newsletter" onsubmit="event.preventDefault(); alert('데모: 백엔드 연결 후 사용하세요.');" style="display:flex;gap:10px">
-          <label class="sr-only" for="email">이메일</label>
-          <input id="email" type="email" placeholder="이메일 주소" aria-label="이메일 주소 입력" required
-                 style="flex:1; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background: var(--panel); color: var(--text);">
+          <input id="email" type="email" placeholder="이메일 주소" required
+                 style="flex:1;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--text)">
           <button type="submit" class="cta" style="border:none">구독</button>
         </form>
-        <p style="color:var(--muted); margin:10px 2px 0">개인정보는 서버에 전송되지 않습니다. 실제 배포 시 구독 서비스와 연동하세요.</p>
+        <p style="color:var(--muted); margin:10px 2px 0">개인정보는 서버에 전송되지 않습니다.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      © <span id="year"></span> 파이썬기초 배우기
-    </div>
+    <div class="container">© <span id="year"></span> 파이썬기초 배우기</div>
   </footer>
 
   <script>
     // 연도
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 현재 보이는 섹션에 맞춰 배지/메뉴 활성화
-    const sectionIds = ['intro','datatype','control','function','io','exception','style','about','newsletter','posts','topics'];
-    const anchors = [...document.querySelectorAll('a[href^="#"]')];
+    // 1) 해시 링크 클릭 시 강제 스크롤 (브라우저/캐시 이슈 방지)
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // 고정 헤더 보정
+      setTimeout(()=>window.scrollBy(0, -76), 0);
+      history.replaceState(null, '', '#' + id);
+    });
 
-    // href -> id 매핑
-    function matchAnchors(id){
-      anchors.forEach(a=>{
+    // 2) 현재 보이는 섹션에 따라 배지/상단 메뉴 강조
+    const watchIds = ['posts','topics','intro','datatype','control','function','io','exception','style','about','newsletter'];
+    const allLinks = [...document.querySelectorAll('a[href^="#"]')];
+
+    function setActive(id){
+      allLinks.forEach(a=>{
         const target = a.getAttribute('href').replace('#','');
-        a.classList.toggle('active', target === id);
-        if(a.classList.contains('badge')) a.classList.toggle('active', target === id);
+        const on = (target === id);
+        a.classList.toggle('active', on);
+        if(a.classList.contains('badge')) a.classList.toggle('active', on);
       });
     }
 
-    // 교차 관찰자로 섹션 감시
-    const observer = new IntersectionObserver((entries)=>{
+    const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
           const id = entry.target.id;
-          if(sectionIds.includes(id)) matchAnchors(id);
+          setActive(id);
         }
       });
-    }, { rootMargin: `-40% 0px -50% 0px`, threshold: 0 });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
-    sectionIds.forEach(id=>{
+    watchIds.forEach(id => {
       const el = document.getElementById(id);
-      if(el) observer.observe(el);
+      if (el) io.observe(el);
     });
 
-    // 페이지 처음에 해시가 있으면 해당 배지 활성화
-    if(location.hash){
-      const id = location.hash.slice(1);
-      matchAnchors(id);
-    }
+    // 새로고침 시 해시 유지되면 해당 항목 활성화
+    if (location.hash) setActive(location.hash.slice(1));
   </script>
 </body>
 </html>
